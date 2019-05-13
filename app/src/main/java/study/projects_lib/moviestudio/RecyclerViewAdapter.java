@@ -16,6 +16,9 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import study.projects_lib.moviestudio.Utils.Parsing;
 
 public class RecyclerViewAdapter extends  RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
 
@@ -24,15 +27,13 @@ public class RecyclerViewAdapter extends  RecyclerView.Adapter<RecyclerViewAdapt
     private static final String TAG = "RecyclerViewAdapter";
 
 
-    private ArrayList<String> mImage = new ArrayList<>();
-    private ArrayList<String> mNames = new ArrayList<>();
+    private List<Parsing> content;
     private Context mContext;
 
-    public RecyclerViewAdapter(ArrayList<String> mImage, ArrayList<String> mNames, Context mContext) {
-        this.mImage = mImage;
-        this.mNames = mNames;
-        this.mContext = mContext;
+    public RecyclerViewAdapter (Context mContext, List<Parsing> list) {
 
+        this.content = list;
+        this.mContext = mContext;
     }
 
     @NonNull
@@ -46,18 +47,17 @@ public class RecyclerViewAdapter extends  RecyclerView.Adapter<RecyclerViewAdapt
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         Log.d(TAG, "onBindViewHolder: called.");
-
         Glide.with(mContext)
                 .asBitmap()
-                .load(mImage.get(i))
+                .load(content.get(i).getUrlImage())
                 .into(viewHolder.image);
 
-        viewHolder.name.setText(mNames.get(i));
+        viewHolder.name.setText(content.get(i).getMovieName());
         viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: Clicked"+ mNames.get(i));
-                Toast.makeText(mContext, mNames.get(i), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onClick: Clicked"+ content.get(i).getMovieName());
+                Toast.makeText(mContext, content.get(i).getMovieName(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -66,7 +66,7 @@ public class RecyclerViewAdapter extends  RecyclerView.Adapter<RecyclerViewAdapt
 
     @Override
     public int getItemCount() {
-        return mImage.size();
+        return content.size();
     }
 
 
