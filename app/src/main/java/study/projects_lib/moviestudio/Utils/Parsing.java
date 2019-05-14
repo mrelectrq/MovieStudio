@@ -1,23 +1,25 @@
 package study.projects_lib.moviestudio.Utils;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+import android.os.StrictMode;
 
-import java.util.ArrayList;
-
-public class Parsing{
+public class Parsing {
 
 
-    public String MovieName;
+    private String movieName;
 
-    public String urlImage;
+    private String urlImage;
+
+    private String urlFilm;
+
+
+
 
     public String getMovieName() {
-        return MovieName;
+        return movieName;
     }
 
     public void setMovieName(String movieName) {
-        MovieName = movieName;
+        this.movieName = movieName;
     }
 
     public String getUrlImage() {
@@ -27,7 +29,6 @@ public class Parsing{
     public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
     }
-
 
 
 }

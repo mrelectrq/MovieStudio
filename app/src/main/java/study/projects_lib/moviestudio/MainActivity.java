@@ -1,11 +1,13 @@
 package study.projects_lib.moviestudio;
 
 import android.media.Image;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Window;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,22 +26,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+//        StrictMode.setThreadPolicy(policy);
 
-        // Initialization recyclerView
+        initRecyclerView();
+
 
     }
 
 
 
-
-
     private void initRecyclerView(){
 
-        List<Parsing> content;
+        List<Parsing> content = new ArrayList<>();
         Service service = new Service();
-        service.setData();
+        service.processFinish(content);
         content = service.list;
-
         RecyclerView.LayoutManager layoutManager;
         RecyclerView recyclerView = findViewById(R.id.recyclerv_view);
         RecyclerViewAdapter adapter=new RecyclerViewAdapter(this ,content);
