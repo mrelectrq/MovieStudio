@@ -6,4 +6,5 @@ import java.util.List;
 public interface IAsyncResponse {
 
     void processFinish(List<Parsing> output);
+
 }

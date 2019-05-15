@@ -63,6 +63,10 @@ public class RecyclerViewAdapter extends  RecyclerView.Adapter<RecyclerViewAdapt
 
 
     }
+    public void setList(List<Parsing> list){
+        this.content=list;
+        notifyDataSetChanged();
+    }
 
     @Override
     public int getItemCount() {
