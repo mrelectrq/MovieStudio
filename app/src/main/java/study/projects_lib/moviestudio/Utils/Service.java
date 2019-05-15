@@ -10,9 +10,6 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
-import study.projects_lib.moviestudio.MainActivity;
 
 
 //https://stackoverflow.com/questions/12575068/how-to-get-the-result-of-onpostexecute-to-main-activity-because-asynctask-is-a
@@ -20,8 +17,8 @@ import study.projects_lib.moviestudio.MainActivity;
 
 
 public class Service {
-    public Parsing data = new Parsing();
-    public List<Parsing> list= new ArrayList<Parsing>() ;
+    public Parsing data;
+    public ArrayList<Parsing> list = new ArrayList<Parsing>();
 
 
     private IAsyncResponse iAsyncResponse;
@@ -30,16 +27,18 @@ public class Service {
         this.iAsyncResponse = iAsyncResponse;
     }
 
-    public void getDataWeb(){
+    public void getDataWeb() {
         new ParserData().execute();
     }
 
-    private class ParserData extends AsyncTask<Void,Void,Void>{
+    private class ParserData extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
 
-            list = getData();
+//            list = getData();
+            getDataNew();
+
             return null;
         }
 
@@ -52,39 +51,96 @@ public class Service {
     }
 
 
-
-
-
-
-    private List<Parsing> getData() {
+    private ArrayList<Parsing> getData() {
 
         try {
 
             Document doc = Jsoup.connect("http://hdkino.vip/filmy/filmy_2019_novinki_hd").get();
-            Element name = doc.select("div[class=post-film-slider-name]").first();
-
-            String mName = name.text();
-//            Log.e("TestParsing", "nameFilm==>" + mName);
-//            data.setMovieName(mName);
-//            String urlimage = "http://hdkino.vip/_bd/19/85430885.jpg";
-//            data.setUrlImage(urlimage);
-//            list.add(data);
-//
-
 
 
             Elements img = doc.select("div.post-film-poster img");
-            for (Element el : img){
+            for (Element el : img) {
                 String src = el.absUrl("src");
-                String alt = el.absUrl("alt");
-                Log.e("TestParsing", "nameFilm==>" + alt);
-//                Log.e("TestParsing", "nameFilm==>" + src);
-//                data.setUrlImage(src);
-//                String alt = el.absUrl("alt");
+                String name = el.attr("alt");
+
+                data = new Parsing();
+                data.setUrlImage(src);
+                data.setMovieName(name);
+
+                Log.e("TestParsing", "nameFilm==>" + src);
+                Log.e("TestParsing", "nameFilm==>" + name);
+
+                list.add(data);
+
+                Log.e("TestParsing", "nameFilm==>" + list.size());
+            }
+
+            Elements urls = doc.select("div.post-film");
+//            Log.e("TestParsing", "nameFilm==>" + urls);
+            for (Element el : urls) {
+                Elements links = el.select("a[href]");
+                String content = links.attr("abs:href");
+                Log.e("TestParsing", "nameFilm==>" + content);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return list;
+    }
+
+    private ArrayList<Parsing> getDataNew() {
+
+        try {
+
+            Document doc = Jsoup.connect("http://hdkino.vip/filmy/filmy_2019_novinki_hd").get();
+
+
+            Elements elements = doc.select("div.post-film");
+            Log.e("TestParsing1", "url==>" + elements);
+            for (Element el : elements) {
+                Elements aa= el.select("div.post-film");
+                Elements links = aa.select("a[href]");
+                String content = links.attr("abs:href");
+
+
+
+                Element element2 = el.select("div.post-film-poster img").first();
+                String src = element2.absUrl("src");
+                String name = element2.attr("alt");
+                Log.e("TestParsing3", "name Film==>" + name);
+                Log.e("TestParsing3", "url image Film==>" + src);
+                Log.e("TestParsing3", "url Film==>" + content);
+                Log.e("TestParsing3", "==============================================");
 
             }
-//            Log.e("TestParsing", "nameFilm==>" + img);
-
+            Log.e("TestParsing4", "nameFilm==>" + list.size());
+//            for (Element el : img) {
+//                String src = el.absUrl("src");
+//                String name = el.attr("alt");
+//
+//                data = new Parsing();
+//                data.setUrlImage(src);
+//                data.setMovieName(name);
+//
+//                Log.e("TestParsing", "nameFilm==>" + src);
+//                Log.e("TestParsing", "nameFilm==>" + name);
+//
+//                list.add(data);
+//
+//                Log.e("TestParsing", "nameFilm==>" + list.size());
+//            }
+//
+//            Elements urls = doc.select("div.post-film");
+////            Log.e("TestParsing", "nameFilm==>" + urls);
+//            for (Element el : urls) {
+//                Elements links = el.select("a[href]");
+//                String content = links.attr("abs:href");
+//                Log.e("TestParsing", "nameFilm==>" + content);
+//            }
 
 
         } catch (IOException e) {

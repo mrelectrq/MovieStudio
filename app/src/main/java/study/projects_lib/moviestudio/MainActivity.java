@@ -43,9 +43,10 @@ public class MainActivity extends AppCompatActivity implements IAsyncResponse {
         Service service = new Service(this);
         service.getDataWeb();
         content=service.list;
+//        Log.e("TestParsing", "nameFilm==>" + content);
         RecyclerView.LayoutManager layoutManager;
         RecyclerView recyclerView = findViewById(R.id.recyclerv_view);
-        adapter=new RecyclerViewAdapter(this ,content);
+         adapter=new RecyclerViewAdapter(this ,content);
         recyclerView.setAdapter(adapter);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);

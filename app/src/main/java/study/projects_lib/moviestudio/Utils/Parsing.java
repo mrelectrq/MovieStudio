@@ -13,6 +13,15 @@ public class Parsing {
 
 
 
+    public String getUrlFilm() {
+        return urlFilm;
+    }
+
+    public void setUrlFilm(String urlFilm) {
+        this.urlFilm = urlFilm;
+    }
+
+
 
     public String getMovieName() {
         return movieName;
