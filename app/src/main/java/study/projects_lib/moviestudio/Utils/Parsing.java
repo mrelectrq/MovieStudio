@@ -40,6 +40,8 @@ public class Parsing {
     }
 
 
+
 }
 
+//https://stackoverflow.com/questions/22188332/download-ts-files-from-video-stream
 
