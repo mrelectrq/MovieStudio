@@ -1,5 +1,6 @@
 package study.projects_lib.moviestudio;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
@@ -27,14 +28,13 @@ public class MainActivity extends AppCompatActivity implements IAsyncResponse {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-//        StrictMode.setThreadPolicy(policy);
 
         initRecyclerView();
 
-
     }
 
+//    Intent intent = new Intent(".PlayerActivity");
+//    startActivity(intent);
 
 
     private void initRecyclerView(){

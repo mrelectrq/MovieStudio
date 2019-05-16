@@ -95,7 +95,7 @@ public class Service {
     private ArrayList<Parsing> getDataNew() {
 
         try {
-
+            //http://moviebuster.tv/film
             Document doc = Jsoup.connect("http://hdkino.vip/filmy/filmy_2019_novinki_hd").get();
 
 
