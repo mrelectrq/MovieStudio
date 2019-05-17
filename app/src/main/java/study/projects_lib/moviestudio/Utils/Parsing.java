@@ -11,6 +11,9 @@ public class Parsing {
 
     private String urlFilm;
 
+    private String urlMp4;
+
+
 
 
     public String getUrlFilm() {
@@ -20,7 +23,6 @@ public class Parsing {
     public void setUrlFilm(String urlFilm) {
         this.urlFilm = urlFilm;
     }
-
 
 
     public String getMovieName() {
@@ -37,6 +39,14 @@ public class Parsing {
 
     public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
+    }
+
+    public String getUrlMp4(){
+        return urlMp4;
+    }
+
+    public void setUrlMp4(String urlMp4){
+        this.urlMp4=urlMp4;
     }
 
 
