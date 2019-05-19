@@ -126,9 +126,6 @@ public class Service {
                 Log.e("TestParsing7", "Name film  ==>" + name);
 
 
-
-
-
                 data.setUrlImage(src);
                 data.setMovieName(name);
                 data.setUrlFilm(content);

@@ -1,9 +1,11 @@
 package study.projects_lib.moviestudio;
 
 import android.content.Context;
-import android.nfc.Tag;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +17,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import study.projects_lib.moviestudio.Utils.Parsing;
@@ -58,11 +59,19 @@ public class RecyclerViewAdapter extends  RecyclerView.Adapter<RecyclerViewAdapt
             public void onClick(View v) {
                 Log.d(TAG, "onClick: Clicked"+ content.get(i).getMovieName());
                 Toast.makeText(mContext, content.get(i).getMovieName(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(mContext ,PlayerActivity.class);
+
+
+                intent.putExtra("image_name", content.get(i).getMovieName());
+                intent.putExtra("mp4_url", content.get(i).getUrlMp4());
+                mContext.startActivity(intent);
+
             }
         });
 
 
     }
+
     public void setList(List<Parsing> list){
         this.content=list;
         notifyDataSetChanged();

@@ -1,16 +1,11 @@
 package study.projects_lib.moviestudio;
 
-import android.content.Intent;
-import android.media.Image;
-import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
-import android.view.Window;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import study.projects_lib.moviestudio.Utils.IAsyncResponse;
@@ -33,8 +28,6 @@ public class MainActivity extends AppCompatActivity implements IAsyncResponse {
 
     }
 
-//    Intent intent = new Intent(".PlayerActivity");
-//    startActivity(intent);
 
 
     private void initRecyclerView(){
