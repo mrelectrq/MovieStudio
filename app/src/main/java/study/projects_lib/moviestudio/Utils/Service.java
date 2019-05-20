@@ -59,7 +59,7 @@ public class Service {
         try {
 
             //http://moviebuster.tv/film
-            Document doc = Jsoup.connect("http://moviebuster.tv/cartoon").get();
+            Document doc = Jsoup.connect("http://moviebuster.tv/film/fdrama").get();
             int i = 0;
 
             Elements elements = doc.select("div.movie-poster");

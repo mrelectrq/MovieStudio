@@ -42,15 +42,15 @@ public class PlayerActivity extends AppCompatActivity  {
     }
 
 
-    private void getIncomingIntent(){
-
-        if(getIntent().hasExtra("image_name")&& getIntent().hasExtra("mp4_url")){
-
-            String imageUrl =getIntent().getStringExtra("image_name");
-            String imageName = getIntent().getStringExtra("mp4_url");
-        }
-
-    }
+//    private void getIncomingIntent(){
+//
+//        if(getIntent().hasExtra("image_name")&& getIntent().hasExtra("mp4_url")){
+//
+//            String imageUrl =getIntent().getStringExtra("image_name");
+//            String imageName = getIntent().getStringExtra("mp4_url");
+//        }
+//
+//    }
 
     private void initializePlayer(){
 

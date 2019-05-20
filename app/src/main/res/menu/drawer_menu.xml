@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/action_fight"
+            android:icon="@drawable/ic_navigation"
+            android:title="ActionFight"></item>
+    <item android:id="@+id/action_vestern"
+        android:icon="@drawable/ic_navigation"
+        android:title="Vestern"></item>
+    <item android:id="@+id/action_war"
+        android:icon="@drawable/ic_navigation"
+        android:title="War"></item>
+    <item android:id="@+id/action_detective"
+        android:icon="@drawable/ic_navigation"
+        android:title="Detective"></item>
+    <item android:id="@+id/action_cartoon"
+        android:icon="@drawable/ic_navigation"
+        android:title="Cartoon"></item>
+    <item android:id="@+id/action_drama"
+        android:icon="@drawable/ic_navigation"
+        android:title="Drama"></item>
+        </group>
+</menu>

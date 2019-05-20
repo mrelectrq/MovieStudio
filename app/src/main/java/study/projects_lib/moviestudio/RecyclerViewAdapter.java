@@ -59,9 +59,9 @@ public class RecyclerViewAdapter extends  RecyclerView.Adapter<RecyclerViewAdapt
             public void onClick(View v) {
                 Log.d(TAG, "onClick: Clicked"+ content.get(i).getMovieName());
                 Toast.makeText(mContext, content.get(i).getMovieName(), Toast.LENGTH_SHORT).show();
+
+
                 Intent intent = new Intent(mContext ,PlayerActivity.class);
-
-
                 intent.putExtra("image_name", content.get(i).getMovieName());
                 intent.putExtra("mp4_url", content.get(i).getUrlMp4());
                 mContext.startActivity(intent);
