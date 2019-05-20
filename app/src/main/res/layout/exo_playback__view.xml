@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
     android:layoutDirection="ltr"
     android:background="#CC000000"
-    android:orientation="vertical"
-    tools:targetApi="28">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,9 +20,6 @@
 
         <ImageButton android:id="@id/exo_rew"
             style="@style/ExoMediaButton.Rewind"/>
-
-        <ImageButton android:id="@id/exo_shuffle"
-            style="@style/ExoMediaButton.Shuffle"/>
 
         <ImageButton android:id="@id/exo_repeat_toggle"
             style="@style/ExoMediaButton"/>
@@ -40,9 +35,6 @@
 
         <ImageButton android:id="@id/exo_next"
             style="@style/ExoMediaButton.Next"/>
-
-        <ImageButton android:id="@id/exo_vr"
-            style="@style/ExoMediaButton.VR"/>
 
     </LinearLayout>
 
@@ -80,20 +72,19 @@
             android:textColor="#FFBEBEBE"/>
 
         <FrameLayout
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_gravity="right"
-            android:id="@+id/fullscreen_button">
+            android:id="@+id/exo_fullscreen_button"
+            android:layout_width="25dp"
+            android:layout_height="21dp"
+            android:layout_gravity="right">
 
             <ImageView
-                android:id="@+id/fullscreen_icon"
+                android:id="@+id/exo_fullscreen_icon"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_fullscreen_expand" />
-
 
         </FrameLayout>
 
