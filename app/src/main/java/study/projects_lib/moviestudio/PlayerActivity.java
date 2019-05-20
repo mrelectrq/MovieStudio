@@ -52,6 +52,11 @@ public class PlayerActivity extends AppCompatActivity  {
     }
 
 
+    //https://geoffledak.com/blog/2017/09/11/how-to-add-a-fullscreen-toggle-button-to-exoplayer-in-android/
+
+
+
+
 //    private void getIncomingIntent(){
 //
 //        if(getIntent().hasExtra("image_name")&& getIntent().hasExtra("mp4_url")){
