@@ -16,7 +16,8 @@
 
         <activity
             android:name=".PlayerActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode">
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize|uiMode"
+            android:theme="@style/AppFullScreenTheme">
             <intent-filter>
                 <action android:name=".PlayerActivity" />
 
@@ -32,5 +33,6 @@
             </intent-filter>
         </activity>
     </application>
+
 
 </manifest>
