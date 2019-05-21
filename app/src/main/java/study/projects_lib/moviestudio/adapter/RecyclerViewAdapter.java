@@ -1,11 +1,10 @@
-package study.projects_lib.moviestudio;
+package study.projects_lib.moviestudio.adapter;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,52 +18,58 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import study.projects_lib.moviestudio.Utils.Parsing;
+import study.projects_lib.moviestudio.R;
+import study.projects_lib.moviestudio.callbacks.ItemClickResponse;
+import study.projects_lib.moviestudio.model.ItemFilm;
 
-public class RecyclerViewAdapter extends  RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
-
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
 
     private static final String TAG = "RecyclerViewAdapter";
 
 
-    private List<Parsing> content;
+    private List<ItemFilm> content;
     private Context mContext;
+    private ItemClickResponse itemClick;
 
-    public RecyclerViewAdapter (Context mContext, List<Parsing> list) {
-
+    public RecyclerViewAdapter(Context mContext, List<ItemFilm> list, ItemClickResponse itemClick) {
         this.content = list;
         this.mContext = mContext;
+        this.itemClick = itemClick;
     }
+
+    public void addItemFilm(ItemFilm itemFilm) {
+        Log.e("TestItwem","iten name film ===>"+itemFilm.getMovieName());
+        content.add(itemFilm);
+        notifyItemInserted(content.size() - 1);
+    }
+
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_listitem,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_listitem, viewGroup, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int position) {
         Log.d(TAG, "onBindViewHolder: called.");
         Glide.with(mContext)
                 .asBitmap()
-                .load(content.get(i).getUrlImage())
+                .load(content.get(position).getUrlImage())
                 .into(viewHolder.image);
 
-        viewHolder.name.setText(content.get(i).getMovieName());
+        viewHolder.name.setText(content.get(position).getMovieName());
         viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: Clicked"+ content.get(i).getMovieName());
-                Toast.makeText(mContext, content.get(i).getMovieName(), Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "onClick: Clicked" + content.get(position).getMovieName());
+                Toast.makeText(mContext, content.get(position).getMovieName(), Toast.LENGTH_SHORT).show();
 
+                itemClick.itemClicked(position);
 
-                Intent intent = new Intent(mContext ,PlayerActivity.class);
-                intent.putExtra("image_name", content.get(i).getMovieName());
-                intent.putExtra("mp4_url", content.get(i).getUrlMp4());
-                mContext.startActivity(intent);
 
             }
         });
@@ -72,8 +77,8 @@ public class RecyclerViewAdapter extends  RecyclerView.Adapter<RecyclerViewAdapt
 
     }
 
-    public void setList(List<Parsing> list){
-        this.content=list;
+    public void setList(List<ItemFilm> list) {
+        this.content = list;
         notifyDataSetChanged();
     }
 
@@ -83,7 +88,7 @@ public class RecyclerViewAdapter extends  RecyclerView.Adapter<RecyclerViewAdapt
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
 
         ImageView image;

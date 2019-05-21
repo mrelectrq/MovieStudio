@@ -1,8 +1,13 @@
-package study.projects_lib.moviestudio.Utils;
+package study.projects_lib.moviestudio.model;
 
-import android.os.StrictMode;
 
-public class Parsing {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
+
+public class ItemFilm  {
 
 
     private String movieName;
@@ -12,6 +17,12 @@ public class Parsing {
     private String urlFilm;
 
     private String urlMp4;
+
+    private String actors;
+
+    private String country;
+
+    private String information;
 
 
 
@@ -48,6 +59,7 @@ public class Parsing {
     public void setUrlMp4(String urlMp4){
         this.urlMp4=urlMp4;
     }
+
 
 
 

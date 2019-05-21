@@ -23,5 +23,24 @@
     <item android:id="@+id/action_drama"
         android:icon="@drawable/ic_navigation"
         android:title="Drama"></item>
+
+        <item android:id="@+id/action_history"
+            android:icon="@drawable/ic_navigation"
+            android:title="History"></item>
+        <item android:id="@+id/action_comedy"
+            android:icon="@drawable/ic_navigation"
+            android:title="Comedy"></item>
+        <item android:id="@+id/action_criminal"
+            android:icon="@drawable/ic_navigation"
+            android:title="Criminal"></item>
+        <item android:id="@+id/action_melodrama"
+            android:icon="@drawable/ic_navigation"
+            android:title="Melodrama"></item>
+        <item android:id="@+id/action_horror"
+            android:icon="@drawable/ic_navigation"
+            android:title="Horror"></item>
+        <item android:id="@+id/action_fantastic"
+            android:icon="@drawable/ic_navigation"
+            android:title="Fantastic"></item>
         </group>
 </menu>

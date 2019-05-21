@@ -122,8 +122,8 @@ public class PlayerActivity extends AppCompatActivity  {
 
     private void initFullscreenButton() {
 
-        PlaybackControlView controlView = mExoPlayerView.findViewById(R.id.exo_controller);
-        mFullScreenIcon = controlView.findViewById(R.id.exo_fullscreen_icon);
+        PlaybackControlView controlView = mExoPlayerView.findViewById(R.id.controller);
+        mFullScreenIcon = controlView.findViewById(R.id.exo_fullscreen);
         mFullScreenButton = controlView.findViewById(R.id.exo_fullscreen_button);
         mFullScreenButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,9 +165,9 @@ public class PlayerActivity extends AppCompatActivity  {
 
         if (mExoPlayerView == null) {
 
-            mExoPlayerView = (SimpleExoPlayerView) findViewById(R.id.exoplayer);
+            mExoPlayerView = findViewById(R.id.exoplayer);
             initFullscreenDialog();
-            initFullscreenButton();
+            //initFullscreenButton();
 
             String streamUrl = getIntent().getStringExtra("mp4_url");
             String userAgent = Util.getUserAgent(PlayerActivity.this, getApplicationContext().getApplicationInfo().packageName);
