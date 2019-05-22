@@ -53,10 +53,11 @@ public class ParserUrlDeafult {
 
         private String getUrlVideo(String url) {
             try {
+
+                Log.e("TestParsing3", "url Film==>" + url);
                 //Mp4 select
                 Document doc1 = Jsoup.connect(url).get();
                 Element element4 = doc1.select("div.trailer").first();
-
                 Element links1 = element4.select("iframe").first();
                 String src1 = links1.absUrl("src");
                 Log.e("TestParsing3", "url Film==>" + src1);
@@ -82,6 +83,10 @@ public class ParserUrlDeafult {
                         return linkFilm;
                     }
                 }
+
+                // Information select
+
+
 
             } catch (Exception e) {
 

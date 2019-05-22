@@ -45,6 +45,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
 
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
@@ -69,8 +70,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Toast.makeText(mContext, content.get(position).getMovieName(), Toast.LENGTH_SHORT).show();
 
                 itemClick.itemClicked(position);
-
-
             }
         });
 

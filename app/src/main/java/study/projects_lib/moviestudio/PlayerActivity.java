@@ -43,6 +43,8 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import study.projects_lib.moviestudio.model.ItemFilm;
+
 public class PlayerActivity extends AppCompatActivity  {
 
     private final String STATE_RESUME_WINDOW = "resumeWindow";
@@ -58,7 +60,7 @@ public class PlayerActivity extends AppCompatActivity  {
 
     private int mResumeWindow;
     private long mResumePosition;
-
+    ItemFilm itemFilm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +68,7 @@ public class PlayerActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_player);
         Log.d("OnCreate", "Started PlayerActivity");
 
+        getDataFromMain();
         if (savedInstanceState != null) {
             mResumeWindow = savedInstanceState.getInt(STATE_RESUME_WINDOW);
             mResumePosition = savedInstanceState.getLong(STATE_RESUME_POSITION);
@@ -75,6 +78,13 @@ public class PlayerActivity extends AppCompatActivity  {
 
 
     //https://geoffledak.com/blog/2017/09/11/how-to-add-a-fullscreen-toggle-button-to-exoplayer-in-android/
+
+    public void getDataFromMain(){
+            Bundle bundle = getIntent().getExtras();
+        Log.e("TestFinal", " rrrr=>" + bundle.getParcelable("data"));
+            itemFilm = bundle.getParcelable("data");
+
+    }
 
 
     @Override
@@ -169,7 +179,7 @@ public class PlayerActivity extends AppCompatActivity  {
             initFullscreenDialog();
             //initFullscreenButton();
 
-            String streamUrl = getIntent().getStringExtra("mp4_url");
+            String streamUrl = getIntent().getStringExtra(itemFilm.getUrlMp4());
             String userAgent = Util.getUserAgent(PlayerActivity.this, getApplicationContext().getApplicationInfo().packageName);
             DefaultHttpDataSourceFactory httpDataSourceFactory = new DefaultHttpDataSourceFactory(userAgent, null, DefaultHttpDataSource.DEFAULT_CONNECT_TIMEOUT_MILLIS, DefaultHttpDataSource.DEFAULT_READ_TIMEOUT_MILLIS, true);
             DefaultDataSourceFactory dataSourceFactory = new DefaultDataSourceFactory(PlayerActivity.this, null, httpDataSourceFactory);
@@ -208,3 +218,6 @@ public class PlayerActivity extends AppCompatActivity  {
     }
 
 }
+
+
+//https://stackoverflow.com/questions/12092612/pass-list-of-objects-from-one-activity-to-other-activity-in-android

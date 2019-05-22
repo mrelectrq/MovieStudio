@@ -32,7 +32,6 @@ public class ServiceSite {
 
     private class ParserData extends AsyncTask<String, ItemFilm, Void> {
 
-
         @Override
         protected Void doInBackground(String... voids) {
             String contentURL = voids[0];
@@ -52,7 +51,6 @@ public class ServiceSite {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-//            iAsyncResponse.processFinish(list);
         }
 
         private void getDataNew(String contentURL) {
@@ -67,17 +65,37 @@ public class ServiceSite {
 
                 for (Element el : elements) {
 
-                    data = new ItemFilm();
+
+
 
                     // Href select
                     Element aa = el.select("a.play-icon").first();
                     Elements links = aa.select("a[href]");
-                    String content = links.attr("abs:href");
+                    String urlFilm = links.attr("abs:href");
+
+                    Log.e("ParserURLContent", "========>"+ urlFilm);
+
+
+                    // Aditional info select
+                    Document doc1 = Jsoup.connect(urlFilm).get();
+
+                    //Actors select
+                    String actors = doc1.select("li.actors").text();
+                    Log.e("ParserURLContent", "========>"+ actors);
+
+                    //Country select
+                    String country = doc1.select("li.common-list").get(2).text();
+                    Log.e("ParserURLContent", "========>"+ country);
+
+                    //Details_text select
+                    String details =doc1.select("div.moview-details-text").text();
+                    Log.e("ParserURLContent", "========>"+ details);
+
 
 
                     // Image select
-                    Element element2 = el.select("div.movie-poster img").first();
-                    String src = element2.absUrl("src");
+                    Element image = el.select("div.movie-poster img").first();
+                    String urlImage = image.absUrl("src");
 
 
                     //Name select
@@ -85,9 +103,14 @@ public class ServiceSite {
                     Element element33 = element3.select("a").get(i++);
                     String name = element33.select("a").text();
 
-                    data.setUrlImage(src);
-                    data.setMovieName(name);
-                    data.setUrlFilm(content);
+                    data=new ItemFilm(name,urlImage,urlFilm,actors,country,details,null);
+
+//                    data.setCountry(country);
+//                    data.setActors(actors);
+//                    data.setInformation(details);
+//                    data.setUrlImage(urlImage);
+//                    data.setMovieName(name);
+//                    data.setUrlFilm(urlFilm);
 
                     publishProgress(data);
                 }
