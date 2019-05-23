@@ -12,7 +12,19 @@ import java.util.List;
 
 
 public class ItemFilm  implements Parcelable {
+    public ItemFilm(){}
+    public ItemFilm(String movieName, String urlImage, String urlFilm, String actors, String country
+            , String information, String urlMp4){
 
+        this.movieName = movieName;
+        this.urlImage = urlImage;
+        this.urlFilm = urlFilm;
+        this.actors=actors;
+        this.country=country;
+        this.information=information;
+        this.urlMp4=urlMp4;
+
+    }
 
     private String movieName;
 
@@ -104,18 +116,9 @@ public class ItemFilm  implements Parcelable {
     }
 
 
-    public ItemFilm(String movieName, String urlImage, String urlFilm, String actors, String country
-            , String information, String urlMp4){
 
-        this.movieName = movieName;
-        this.urlImage = urlImage;
-        this.urlFilm = urlFilm;
-        this.actors=actors;
-        this.country=country;
-        this.information=information;
-        this.urlMp4=urlMp4;
 
-    }
+
 
     public ItemFilm (Parcel in){
         movieName= in.readString();

@@ -14,44 +14,39 @@ import java.util.regex.Pattern;
 import study.projects_lib.moviestudio.callbacks.ItemFilmResponse;
 import study.projects_lib.moviestudio.model.ItemFilm;
 
-public class ParserUrlDeafult {
+public class ParseContent {
 
 
-    private ItemFilmResponse itemFilmResponse;
-    private int position;
+
+private ItemFilmResponse itemFilmResponse;
+private int position;
 
 
-    public ParserUrlDeafult(ItemFilmResponse itemFilmResponse) {
-        this.itemFilmResponse = itemFilmResponse;
+    public ParseContent(ItemFilmResponse itemFilmResponse){
+        this.itemFilmResponse=itemFilmResponse;
     }
 
-    public void giveUrlFilm(String content, int position) {
-        this.position = position;
-        new ParserData().execute(content);
+    public void giveData(String content, int position){
+
+        this.position=position;
+        new ParserDataContent().execute(content);
+
     }
 
-
-    private class ParserData extends AsyncTask<String, Void, String> {
+    private class ParserDataContent extends AsyncTask<String, Void, ItemFilm>{
 
 
         @Override
-        protected String doInBackground(String... voids) {
-            String contentURL = voids[0];
+        protected ItemFilm doInBackground(String... strings) {
+            String contentURL=strings[0];
 
-            return getUrlVideo(contentURL);
-
-
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            super.onPostExecute(s);
-            Log.e("TestParsing55", "dssafdas==>" + s);
-            itemFilmResponse.itemUrlResponse(s, position);
+            getInfoContent(contentURL);
+            return null;
         }
 
 
-        private String getUrlVideo(String url) {
+        private String getInfoContent(String url){
+
             try {
                 Log.e("TestParsing3", "url Film==>" + url);
                 //Mp4 select
@@ -82,6 +77,19 @@ public class ParserUrlDeafult {
 
                 }
 
+                //Actors select
+                String actors = doc1.select("li.actors").text();
+                Log.e("ParserURLContent", "========>"+ actors);
+
+                //Country select
+                String country = doc1.select("li.common-list").get(2).text();
+                Log.e("ParserURLContent", "========>"+ country);
+
+                //Details_text select
+                String details =doc1.select("div.moview-details-text").text();
+                Log.e("ParserURLContent", "========>"+ details);
+
+
 
                 // Information select
 
@@ -90,9 +98,17 @@ public class ParserUrlDeafult {
             } catch (Exception e) {
 
             }
+
+
+
+
+
             return "";
         }
+
+
+
     }
+
+
 }
-
-

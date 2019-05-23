@@ -35,6 +35,7 @@ public class ServiceSite {
         @Override
         protected Void doInBackground(String... voids) {
             String contentURL = voids[0];
+
             getDataNew(contentURL);
             return null;
 

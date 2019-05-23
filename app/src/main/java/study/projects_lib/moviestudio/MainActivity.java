@@ -184,7 +184,8 @@ public class MainActivity extends AppCompatActivity implements IAsyncResponse, I
     @Override
     public void itemUrlResponse(String urlFilm, int position) {
 
-        ItemFilm itemFilm = new ItemFilm(contentListFilm.get(position).getMovieName(),
+        ItemFilm itemFilm = new ItemFilm(
+                contentListFilm.get(position).getMovieName(),
                 contentListFilm.get(position).getUrlImage(),
                 contentListFilm.get(position).getUrlFilm(),
                 contentListFilm.get(position).getActors(),
@@ -194,14 +195,6 @@ public class MainActivity extends AppCompatActivity implements IAsyncResponse, I
 
 
 
-
-//        itemFilm.setMovieName(contentListFilm.get(position).getMovieName());
-//        itemFilm.setUrlFilm(contentListFilm.get(position).getUrlFilm());
-//        itemFilm.setUrlImage(contentListFilm.get(position).getUrlImage());
-//        itemFilm.setCountry(contentListFilm.get(position).getCountry());
-//        itemFilm.setInformation(contentListFilm.get(position).getInformation());
-//        itemFilm.setActors(contentListFilm.get(position).getActors());
-//        itemFilm.setUrlMp4(urlFilm);
 
         contentListFilm.set(position, itemFilm);
 
@@ -215,19 +208,14 @@ public class MainActivity extends AppCompatActivity implements IAsyncResponse, I
     }
     public void openAnotherScreen(int position){
         Intent intent = new Intent(getApplicationContext(), PlayerActivity.class);
-        Bundle bundle=new Bundle();
 
-        Log.e("TestFinal", " rrrr=>" + contentListFilm.get(position).getUrlMp4());
-        bundle.putParcelable("data",contentListFilm.get(position));
+        intent.putExtra("data",contentListFilm.get(position));
         intent.putExtras(intent);
-
-
 
 //        intent.putExtra("mp4_url",contentListFilm.get(position).getUrlMp4());
 //        intent.putExtra("movie_name", contentListFilm.get(position).getMovieName());
 //        intent.putExtra("actors_name",contentListFilm.get(position).getActors());
 //        intent.putExtra("aditional_info", contentListFilm.get(position).getInformation());
-
 
 
         startActivity(intent);

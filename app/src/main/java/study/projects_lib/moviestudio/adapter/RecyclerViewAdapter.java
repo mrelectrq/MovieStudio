@@ -68,9 +68,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             public void onClick(View v) {
                 Log.d(TAG, "onClick: Clicked" + content.get(position).getMovieName());
                 Toast.makeText(mContext, content.get(position).getMovieName(), Toast.LENGTH_SHORT).show();
-
                 itemClick.itemClicked(position);
             }
+
+
         });
 
 
@@ -101,7 +102,5 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             parentLayout = itemView.findViewById(R.id.parent_layout);
 
         }
-
-
     }
 }
