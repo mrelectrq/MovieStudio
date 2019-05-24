@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:fillViewport="true"
     tools:context=".PlayerActivity"
-    android:background="#413F39">
+    android:background="#413F39"
+    android:id="@+id/scoll_view">
 
 
 
@@ -71,22 +72,17 @@
         </RelativeLayout>
 
 
-
-
-
-
         <FrameLayout
+            android:id="@+id/frame_scretch"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:id="@+id/frame_scretch">
+            android:layout_height="200dp">
 
             <TextView
+                android:id="@+id/film_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/film_info"
                 android:text="Informationnnnnn"
-                android:textColor="@color/textColorOrange"/>
+                android:textColor="@color/textColorOrange" />
         </FrameLayout>
 
 
@@ -96,22 +92,19 @@
           android:layout_height="wrap_content"
           android:orientation="horizontal">
 
-
-    <FrameLayout
-        android:id="@+id/main_media_frame"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.5"
-        android:layout_alignParentBottom="true"
-        android:paddingBottom="5dp">
-
-        <com.google.android.exoplayer2.ui.SimpleExoPlayerView
-            android:id="@+id/exoplayer"
+          <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignStart="@+id/main_media_frame"
-            android:gravity="center" />
-    </FrameLayout>
+            android:layout_height="match_parent">
+
+              <ImageButton
+                  android:id="@+id/button_start"
+                  android:layout_width="105dp"
+                  android:layout_height="117dp"
+                  android:layout_centerInParent="true"
+                  android:src="@drawable/icon_play"
+                  android:background="#413F39"/>
+          </RelativeLayout>
+
 
 
 

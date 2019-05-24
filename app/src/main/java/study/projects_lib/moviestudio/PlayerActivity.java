@@ -2,6 +2,8 @@ package study.projects_lib.moviestudio;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.app.Dialog;
@@ -50,7 +52,7 @@ import com.google.android.exoplayer2.util.Util;
 
 import study.projects_lib.moviestudio.model.ItemFilm;
 
-public class PlayerActivity extends AppCompatActivity  {
+public class PlayerActivity extends AppCompatActivity {
 
 
     private TrackSelector trackSelector;
@@ -60,6 +62,9 @@ public class PlayerActivity extends AppCompatActivity  {
     private Dialog mFullScreenDialog;
     private boolean mExoPlayerFullscreen=false;
     private ImageView mFullScreenIcon;
+    private FrameLayout mFullScreenButton;
+
+
 
 
     ItemFilm itemFilm =new ItemFilm();
@@ -68,8 +73,8 @@ public class PlayerActivity extends AppCompatActivity  {
     private TextView actors;
     private TextView country;
     private TextView information;
-    private FrameLayout mFullScreenButton;
 
+    private ImageView button_start;
 
 
     @Override
@@ -78,12 +83,29 @@ public class PlayerActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_player);
         Log.d("OnCreate", "Started PlayerActivity");
 
+        button_start=findViewById(R.id.button_start);
+        button_start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                  FragmentExo  fragment = new FragmentExo();
+
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment_exo,fragment);
+                transaction.commit();
+//                initializePlayer();
+            }
+        });
+
         getDataFromMain();
         initialize();
-        initializePlayer();
+
 
     }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 
     //https://geoffledak.com/blog/2017/09/11/how-to-add-a-fullscreen-toggle-button-to-exoplayer-in-android/
 
@@ -115,21 +137,20 @@ public class PlayerActivity extends AppCompatActivity  {
 
     }
 
+
     public void initializePlayer(){
             BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
             TrackSelection.Factory videoTrackSelectorFactory =
                     new AdaptiveTrackSelection.Factory(bandwidthMeter);
             trackSelector = new DefaultTrackSelector(videoTrackSelectorFactory);
 
-
             //Initializare player
         player = ExoPlayerFactory.newSimpleInstance(this,trackSelector);
-
-
 
         //Initializare simpleExoplayerView
         simpleExoPlayerView = findViewById(R.id.exoplayer);
         simpleExoPlayerView.setPlayer(player);
+
 
 
         String streamUrl = itemFilm.getUrlMp4();
@@ -144,66 +165,13 @@ public class PlayerActivity extends AppCompatActivity  {
 
         mediaSource = new ExtractorMediaSource(dataUri, dataSourceFactory, extractorsFactory, null, null);
 
-
         player.prepare(mediaSource);
 
 //        initFullscreenButton();
-        initFullscreenDialog();
-        openFullscreenDialog();
+//        initFullscreenDialog();
         simpleExoPlayerView.getPlayer().setPlayWhenReady(false);
 
-
     }
-
-
-        public void initFullscreenDialog(){
-            mFullScreenDialog= new Dialog(this, R.style.AppFullScreenTheme){
-                @Override
-                public void onBackPressed(){
-                    if (mExoPlayerFullscreen)
-                        closeFullscreenDialog();
-                    super.onBackPressed();
-                }
-            };
-        }
-
-
-        private void openFullscreenDialog(){
-
-            ((ViewGroup) simpleExoPlayerView.getParent()).removeView(simpleExoPlayerView);
-            mFullScreenDialog.addContentView(simpleExoPlayerView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-            mFullScreenIcon=findViewById(R.id.exo_fullscreen_icon);
-            mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_fullscreen_skrink));
-            mExoPlayerFullscreen=true;
-            mFullScreenDialog.show();
-
-        }
-
-        private void closeFullscreenDialog(){
-            ((ViewGroup) simpleExoPlayerView.getParent()).removeView(simpleExoPlayerView);
-            ((FrameLayout) findViewById(R.id.main_media_frame)).addView(simpleExoPlayerView);
-            mExoPlayerFullscreen=false;
-            mFullScreenDialog.dismiss();
-            mFullScreenIcon.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.ic_fullscreen_expand));
-        }
-
-
-        private void initFullscreenButton(){
-        PlaybackControlView controlView= simpleExoPlayerView.findViewById(R.id.exo_controller_view);
-        mFullScreenIcon = controlView.findViewById(R.id.exo_fullscreen_icon);
-        mFullScreenButton = controlView.findViewById(R.id.exo_fullscreen_button);
-        mFullScreenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!mExoPlayerFullscreen)
-                    openFullscreenDialog();
-                else
-                    closeFullscreenDialog();
-            }
-        });
-
-        }
-
 
 
 }

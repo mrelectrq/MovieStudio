@@ -38,8 +38,6 @@ public class ServiceSite {
 
             getDataNew(contentURL);
             return null;
-
-
         }
 
         @Override
@@ -77,23 +75,6 @@ public class ServiceSite {
                     Log.e("ParserURLContent", "========>"+ urlFilm);
 
 
-                    // Aditional info select
-                    Document doc1 = Jsoup.connect(urlFilm).get();
-
-                    //Actors select
-                    String actors = doc1.select("li.actors").text();
-                    Log.e("ParserURLContent", "========>"+ actors);
-
-                    //Country select
-                    String country = doc1.select("li.common-list").get(2).text();
-                    Log.e("ParserURLContent", "========>"+ country);
-
-                    //Details_text select
-                    String details =doc1.select("div.moview-details-text").text();
-                    Log.e("ParserURLContent", "========>"+ details);
-
-
-
                     // Image select
                     Element image = el.select("div.movie-poster img").first();
                     String urlImage = image.absUrl("src");
@@ -104,14 +85,7 @@ public class ServiceSite {
                     Element element33 = element3.select("a").get(i++);
                     String name = element33.select("a").text();
 
-                    data=new ItemFilm(name,urlImage,urlFilm,actors,country,details,null);
-
-//                    data.setCountry(country);
-//                    data.setActors(actors);
-//                    data.setInformation(details);
-//                    data.setUrlImage(urlImage);
-//                    data.setMovieName(name);
-//                    data.setUrlFilm(urlFilm);
+                    data=new ItemFilm(name,urlImage,urlFilm,null,null,null,null);
 
                     publishProgress(data);
                 }

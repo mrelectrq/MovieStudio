@@ -21,15 +21,15 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import study.projects_lib.moviestudio.callbacks.IAsyncResponse;
 import study.projects_lib.moviestudio.callbacks.ItemClickResponse;
 import study.projects_lib.moviestudio.callbacks.ItemFilmResponse;
 import study.projects_lib.moviestudio.model.ItemFilm;
+import study.projects_lib.moviestudio.utils.ParseContent;
 import study.projects_lib.moviestudio.utils.ParserUrlDeafult;
 import study.projects_lib.moviestudio.utils.ServiceSite;
 import study.projects_lib.moviestudio.adapter.RecyclerViewAdapter;
 
-public class MainActivity extends AppCompatActivity implements IAsyncResponse, ItemClickResponse, ItemFilmResponse, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements ItemClickResponse, ItemFilmResponse, NavigationView.OnNavigationItemSelectedListener {
 
 
     private static final String CONTENT_ACTION_FIGHT = "http://moviebuster.tv/film/fboevik";
@@ -92,11 +92,6 @@ public class MainActivity extends AppCompatActivity implements IAsyncResponse, I
 
     }
 
-
-    @Override
-    public void processFinish(List<ItemFilm> output) {
-        adapter.setList(output);
-    }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -167,8 +162,9 @@ public class MainActivity extends AppCompatActivity implements IAsyncResponse, I
         if(contentListFilm.get(position).getUrlMp4()==null) {
             Log.e("TestScccccc","sscccccc==>"+contentListFilm.get(position).getUrlMp4());
 
-            ParserUrlDeafult parserUrlDeafult = new ParserUrlDeafult(this);
-            parserUrlDeafult.giveUrlFilm(contentListFilm.get(position).getUrlFilm(), position);
+            ParseContent parseContent=new ParseContent(this);
+            parseContent.getDataWeb(contentListFilm.get(position).getUrlFilm(), position);
+
 
         }else{
             openAnotherScreen(position);
@@ -184,19 +180,19 @@ public class MainActivity extends AppCompatActivity implements IAsyncResponse, I
     @Override
     public void itemUrlResponse(String urlFilm, int position) {
 
-        ItemFilm itemFilm = new ItemFilm(
-                contentListFilm.get(position).getMovieName(),
-                contentListFilm.get(position).getUrlImage(),
-                contentListFilm.get(position).getUrlFilm(),
-                contentListFilm.get(position).getActors(),
-                contentListFilm.get(position).getCountry(),
-                contentListFilm.get(position).getInformation(),
-                urlFilm);
-
-
-
-
-        contentListFilm.set(position, itemFilm);
+//        ItemFilm itemFilm = new ItemFilm(
+//                contentListFilm.get(position).getMovieName(),
+//                contentListFilm.get(position).getUrlImage(),
+//                contentListFilm.get(position).getUrlFilm(),
+//                contentListFilm.get(position).getActors(),
+//                contentListFilm.get(position).getCountry(),
+//                contentListFilm.get(position).getInformation(),
+//                urlFilm);
+//
+//
+//
+//
+//        contentListFilm.set(position, itemFilm);
 
 
 
@@ -205,17 +201,35 @@ public class MainActivity extends AppCompatActivity implements IAsyncResponse, I
         if (urlFilm.length() > 0) {
             openAnotherScreen(position);
         }
+    } //Doesnt work now
+
+
+
+    @Override
+    public void itemContentResponse(ItemFilm itemFilm, int position) {
+        ItemFilm itemFilm1=new ItemFilm(
+                contentListFilm.get(position).getMovieName(),
+                contentListFilm.get(position).getUrlImage(),
+                contentListFilm.get(position).getUrlFilm(),
+                itemFilm.getActors(),
+                itemFilm.getCountry(),
+                itemFilm.getInformation(),
+                itemFilm.getUrlMp4());
+
+        contentListFilm.set(position,itemFilm1);
+
+        if (itemFilm1.getUrlMp4()==null){
+            itemFilm1.setUrlMp4("");
+        }
+        else openAnotherScreen(position);
+
     }
+
     public void openAnotherScreen(int position){
         Intent intent = new Intent(getApplicationContext(), PlayerActivity.class);
 
         intent.putExtra("data",contentListFilm.get(position));
-        intent.putExtras(intent);
 
-//        intent.putExtra("mp4_url",contentListFilm.get(position).getUrlMp4());
-//        intent.putExtra("movie_name", contentListFilm.get(position).getMovieName());
-//        intent.putExtra("actors_name",contentListFilm.get(position).getActors());
-//        intent.putExtra("aditional_info", contentListFilm.get(position).getInformation());
 
 
         startActivity(intent);

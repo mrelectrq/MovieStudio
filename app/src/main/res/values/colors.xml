@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
     <color name="backgroundColor">#413F39</color>
     <color name="textColorOrange">#DF822A</color>
+    <color name="sampleOrangeButtn">#DF822A</color>
+    <color name="focusOrangeButtn">#AE781D</color>
 </resources>

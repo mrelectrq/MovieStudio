@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +27,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 
     private static final String TAG = "RecyclerViewAdapter";
-
+    private int selected_position = RecyclerView.NO_POSITION;
 
     private List<ItemFilm> content;
     private Context mContext;
@@ -61,7 +62,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .asBitmap()
                 .load(content.get(position).getUrlImage())
                 .into(viewHolder.image);
-
+        viewHolder.itemView.setSelected(selected_position==position);
         viewHolder.name.setText(content.get(position).getMovieName());
         viewHolder.parentLayout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,17 +70,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Log.d(TAG, "onClick: Clicked" + content.get(position).getMovieName());
                 Toast.makeText(mContext, content.get(position).getMovieName(), Toast.LENGTH_SHORT).show();
                 itemClick.itemClicked(position);
+                notifyItemChanged(selected_position);
+                selected_position=getItemCount();
+                notifyItemChanged(selected_position);
             }
 
 
         });
 
-
-    }
-
-    public void setList(List<ItemFilm> list) {
-        this.content = list;
-        notifyDataSetChanged();
     }
 
     @Override
@@ -102,5 +100,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             parentLayout = itemView.findViewById(R.id.parent_layout);
 
         }
+
+
     }
 }
