@@ -1,17 +1,22 @@
 package study.projects_lib.moviestudio;
 
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 
 import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
@@ -32,8 +37,8 @@ import com.google.android.exoplayer2.upstream.DefaultHttpDataSource;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
-public class FragmentExo extends Fragment
-{
+
+public class ExoPlayerFragment extends DialogFragment {
 
     private TrackSelector trackSelector;
     private ExoPlayer player;
@@ -44,22 +49,20 @@ public class FragmentExo extends Fragment
     private ImageView mFullScreenIcon;
     private FrameLayout mFullScreenButton;
     private String urlMp4;
-
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_content, container,false);
-        return view;
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.AppFullScreenTheme);
+        initializePlayer();
     }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_exo_player, container, false);
 
-
-
-
-
-
-
-
+    }
 
     public void initializePlayer(){
         Bundle bundle = getActivity().getIntent().getExtras();
@@ -99,4 +102,6 @@ public class FragmentExo extends Fragment
         simpleExoPlayerView.getPlayer().setPlayWhenReady(false);
 
     }
+
+
 }

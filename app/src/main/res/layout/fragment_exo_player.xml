@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/backgroundColor"
-    android:id="@+id/fragment_exo"
-    tools:context="study.projects_lib.moviestudio.FragmentExo">
+    tools:context=".ExoPlayerFragment"
+    android:id="@+id/fragment_exo">
 
 
     <com.google.android.exoplayer2.ui.SimpleExoPlayerView
@@ -14,4 +13,5 @@
         android:layout_height="match_parent"
         android:layout_alignStart="@+id/fragment_exo"
         android:gravity="center" />
+
 </FrameLayout>

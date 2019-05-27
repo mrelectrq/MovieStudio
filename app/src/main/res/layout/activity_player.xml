@@ -1,113 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:fillViewport="true"
-    tools:context=".PlayerActivity"
-    android:background="#413F39"
-    android:id="@+id/scoll_view">
+    tools:context=".PlayerActivity">
 
-
-
-    <LinearLayout
+    <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical">
+        android:id="@+id/container">
 
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+    </androidx.viewpager.widget.ViewPager>
 
-
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="300dp"
-            android:id="@+id/image_content"
-            android:src="@mipmap/ic_launcher"
-            />
-
-            <TextView
-                android:id="@+id/name_film"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="155dp"
-                android:layout_marginTop="50dp"
-                android:text="Name Film"
-                android:textSize="20dp"
-                android:textColor="@color/textColorOrange"/>
-
-
-            <TextView
-                android:id="@+id/country_film"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/image_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="180dp"
-                android:layout_marginTop="121dp"
-                android:layout_marginEnd="0dp"
-                android:text="Country"
-                android:textColor="@color/textColorOrange"/>
-
-            <TextView
-                android:id="@+id/actors_film"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="179dp"
-                android:layout_marginTop="160dp"
-                android:layout_marginEnd="1dp"
-                android:text="Actors"
-                android:textColor="@color/textColorOrange"/>
-
-
-        </RelativeLayout>
-
-
-        <FrameLayout
-            android:id="@+id/frame_scretch"
-            android:layout_width="match_parent"
-            android:layout_height="200dp">
-
-            <TextView
-                android:id="@+id/film_info"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Informationnnnnn"
-                android:textColor="@color/textColorOrange" />
-        </FrameLayout>
-
-
-        <!--  Contentul de jos Player -->
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal">
-
-          <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-              <ImageButton
-                  android:id="@+id/button_start"
-                  android:layout_width="105dp"
-                  android:layout_height="117dp"
-                  android:layout_centerInParent="true"
-                  android:src="@drawable/icon_play"
-                  android:background="#413F39"/>
-          </RelativeLayout>
-
-
-
-
-      </LinearLayout>
-    </LinearLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
